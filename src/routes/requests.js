@@ -4,6 +4,7 @@ const ConnectionRequest = require('../models/connectionRequest');
 const requestRouter  = express.Router();
 
 const User = require('../models/user');
+const sendEmail = require('../utils/sendEmail');
 
 
 requestRouter.post('/request/send/:status/:toUserID', userAuth , async (req,res)=> {
@@ -37,6 +38,8 @@ requestRouter.post('/request/send/:status/:toUserID', userAuth , async (req,res)
     });
 
     const data = await connectionRequest.save();
+    const sendEmail =await sendEmail.run();
+
     res.json({
         message : firstName+ ", your request to " + toUser.firstName + " is successfull!",
         data,

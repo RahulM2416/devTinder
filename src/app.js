@@ -9,6 +9,9 @@ const profileRouter = require('./routes/profile');
 const requestRouter = require('./routes/requests');
 const userRouter = require('./routes/users');
 const cors = require('cors');
+require('dotenv').config();
+require('date-fns')
+require('node-cron');
 
 app.use(cors({
     origin : 'http://localhost:5173',
