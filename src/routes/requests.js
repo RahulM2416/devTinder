@@ -4,7 +4,7 @@ const ConnectionRequest = require('../models/connectionRequest');
 const requestRouter  = express.Router();
 
 const User = require('../models/user');
-const sendEmail = require('../utils/sendEmail');
+const {run} = require('../utils/sendEmail');
 
 
 requestRouter.post('/request/send/:status/:toUserID', userAuth , async (req,res)=> {
@@ -38,7 +38,7 @@ requestRouter.post('/request/send/:status/:toUserID', userAuth , async (req,res)
     });
 
     const data = await connectionRequest.save();
-    const resEm  =await sendEmail.run();
+    const resEm  =await run();
     console.log(resEm);
 
     res.json({
