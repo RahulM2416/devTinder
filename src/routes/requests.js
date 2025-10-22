@@ -38,7 +38,8 @@ requestRouter.post('/request/send/:status/:toUserID', userAuth , async (req,res)
     });
 
     const data = await connectionRequest.save();
-    const sendEmail =await sendEmail.run();
+    const resEm  =await sendEmail.run();
+    console.log(resEm);
 
     res.json({
         message : firstName+ ", your request to " + toUser.firstName + " is successfull!",
