@@ -9,7 +9,7 @@ const userAuth = async (req,res,next)=> {
     if(!token){
         res.status(401).send("Token does not exist");
     }
-    const verifyUser = await jwt.verify(token,"@Rahulm6124");
+    const verifyUser = await jwt.verify(token,process.env.JWT_TOKEN);
     
     if(!verifyUser){
         res.status(401).send("User does not exists");}

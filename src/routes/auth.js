@@ -19,7 +19,7 @@ authRouter.post("/signup", async (req,res)=>{
 
  const user = new User({firstName,lastName,emailID,password:passwordHash, photoURL});
  const data = await user.save();
- const token = await jwt.sign({_id : data._id},"@Rahulm6124");
+ const token = await jwt.sign({_id : data._id},process.env.JWT_TOKEN);
             res.cookie("token",token);
  res.json({message :"User data updated successfully.." , data : data});
 
@@ -42,7 +42,7 @@ authRouter.post("/login" , async (req,res)=>{
          const checkPassword = await bcrypt.compare(password,userExists.password);
          if(checkPassword){
             //create a jwt token
-            const token = await jwt.sign({_id : userExists._id},"@Rahulm6124");
+            const token = await jwt.sign({_id : userExists._id},process.env.JWT_TOKEN);
             // add token to the cookie to store in user browser
             res.cookie("token",token);
 
